@@ -118,6 +118,7 @@ REST_FRAMEWORK = {
     'SEARCH_PARAM': 'name'
 }
 
+
 DJOSER = {
     'LOGIN_FIELD': 'email',
     'SERIALIZERS': {
