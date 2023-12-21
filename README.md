@@ -54,24 +54,25 @@ DEBUG=False
 ```
 Запустить docker-compose.production:
 ```bash
-docker compose -f docker-compose.production.yml up
+sudo docker compose -f docker-compose.production.yml up
 ```
-Выполнить миграции, сбор статики, загрузку ингредиентов:
+Создать/выполнить миграции, собрать статику, загрузить ингредиенты:
 ```bash
-docker compose -f docker-compose.production.yml exec backend python manage.py migrate
-docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
-docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /static/static/
-docker compose -f docker-compose.production.yml exec backend python manage.py import
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py makemigrations
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /static/static/
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py import
 ```
 Создать суперпользователя, ввести почту, логин, пароль:
 ```bash
-docker compose -f docker-compose.production.yml exec backend python manage.py createsuperuser
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py createsuperuser
 ```
 # Автор проекта
 [Александр Волков](https://github.com/alextriano)
 ## Данные для проверки:
-https://alextrianohost.ddnsking.com  
+https://alextrianohost2.ddnsking.com/ 
 login: 
-alextriano  
+superuser  
 pass: 
 jDV*Xc6qJz4s!c5
