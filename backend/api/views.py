@@ -6,7 +6,6 @@ from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-
 from rest_framework import viewsets, serializers
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
@@ -234,9 +233,9 @@ class FavoriteViewSet(viewsets.ViewSet):
             recipe = Recipe.objects.filter(pk=id).first()
         except Recipe.DoesNotExist:
             raise serializers.ValidationError('Рецепта нет')
-        if not FavoriteRecipe.objects.filter(user=user, recipe=recipe).first():
+        if not user.favorite_recipes.filter(recipe=recipe).first():
             raise serializers.ValidationError('Рецепт не в избранном')
-        FavoriteRecipe.objects.filter(user=user, recipe=recipe).delete()
+        user.favorite_recipes.filter(recipe=recipe).delete()
         return Response(
             status=HTTPStatus.NO_CONTENT,
             exception=True
@@ -286,9 +285,9 @@ class ShoppingCartViewSet(viewsets.ViewSet):
             recipe = Recipe.objects.filter(pk=id).first()
         except Recipe.DoesNotExist:
             raise serializers.ValidationError('Рецепта нет')
-        if not ShoppingCart.objects.filter(user=user, recipe=recipe).first():
+        if not user.cart_recipes.filter(recipe=recipe).first():
             raise serializers.ValidationError('Рецепт не в корзине')
-        ShoppingCart.objects.filter(user=user, recipe=recipe).delete()
+        user.cart_recipes.filter(recipe=recipe).delete()
         return Response(
             status=HTTPStatus.NO_CONTENT,
             exception=True
