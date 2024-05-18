@@ -70,9 +70,3 @@ sudo docker compose -f docker-compose.production.yml exec backend python manage.
 ```
 # Автор проекта
 [Александр Волков](https://github.com/alextriano)
-## Данные для проверки:
-https://alextrianohost2.ddnsking.com/ 
-login: 
-superuser  
-pass: 
-jDV*Xc6qJz4s!c5
